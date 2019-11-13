@@ -11,6 +11,7 @@
     "com.unity.xr.arcore": "2.1.2",
     "com.unity.xr.arkit": "2.1.2",
     "com.unity.xr.oculus": "1.0.2",
+    "io.jorand.akka": "https://github.com/iPomme/Akka-Package.git#ed6c11b92325e4c1ad69f35eee14922f5cdb5d53",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -42,5 +43,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "io.jorand.akka": {
+      "revision": "ed6c11b92325e4c1ad69f35eee14922f5cdb5d53",
+      "hash": "ed6c11b92325e4c1ad69f35eee14922f5cdb5d53"
+    }
   }
 }
