@@ -9,6 +9,7 @@ public class ChairTracker : MonoBehaviour
     public GameObject chair;
     public GameObject pastEnvironment;
     public GameObject futureEnvironment;
+    public GameObject websoket;
 
     public float deltaUp = .20f;
     public float deltaBack = .05f;
@@ -24,10 +25,12 @@ public class ChairTracker : MonoBehaviour
     private string currentState = PRESENT;
     
     private bool chairDown = true;
+    private WebSocketUnityServer _server;
 
     private void Start()
     {
         _animator = chair.GetComponent<Animator>();
+        _server = websoket.GetComponent<WebSocketUnityServer>();
     }
 
     // Update is called once per frame
@@ -68,6 +71,7 @@ public class ChairTracker : MonoBehaviour
         if (initialHeight != null && transform.position.y < initialHeight + deltaBack && !chairDown)
         {
             Debug.Log("Chair Down");
+            chairDown = true;
             switch (currentState)
             {
             case PRESENT:
@@ -89,12 +93,23 @@ public class ChairTracker : MonoBehaviour
         {
             case PRESENT:
                 Debug.LogFormat("Assis({0}) in the present", val);
+                _server.sendtochair("20");
+                Debug.Log("send(20) to the soket");
+
+                
                 break;
             case FUTURE:
                 Debug.LogFormat("Assis({0}) in the future", val);
+                _server.sendtochair("60");
+                Debug.Log("send(60) to the soket");
+
+
                 break;
             case PAST:
                 Debug.LogFormat("Assis({0}) in the past", val);
+                _server.sendtochair("0");
+                Debug.Log("send(0) to the soket");
+
                 break;
         }
     }

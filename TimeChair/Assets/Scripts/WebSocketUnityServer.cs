@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Akka.Actor;
+using Akka.IO;
 using Akka.Util.Internal;
 using DotNetty.Common.Utilities;
 using Jorand.AkkaUnity;
@@ -19,18 +20,24 @@ public class WebSocketUnityServer : MonoBehaviourActor
     // Start is called before the first frame update
     private WebSocketServer wssv;
     private string temperature;
-
+    private Echo EcoAndler;
     private void Start()
     {
         UnityThread.initUnityThread();
     }
 
+    public void sendtochair(string msg)
+    {
+        EcoAndler.sendto(msg);
+    }
     private void OnEnable()
     {
 
         
         wssv = new WebSocketServer(port);
-        wssv.AddWebSocketService<Echo>("/chair",() => new Echo(chairTracker));
+        EcoAndler = new Echo(chairTracker);
+        wssv.AddWebSocketService<Echo>("/chair",() => EcoAndler);
+        
         wssv.Start();
         
         Debug.LogFormat("Websocket Server started on port {0}", port);
@@ -59,6 +66,11 @@ public class Echo : WebSocketBehavior
     {
         _tracker = tracker.GetComponent<ChairTracker>();
     }
+
+    public void sendto(string msg)
+    {
+        Send(msg);
+    }
     protected override void OnMessage(MessageEventArgs e)
     {
         var buffer = e.RawData;
@@ -66,9 +78,9 @@ public class Echo : WebSocketBehavior
 
 //        Debug.LogFormat("Got message from the websocket solar value'{0}'", BitConverter.ToInt16(buffer,0));
         int assis = BitConverter.ToInt16(buffer, 2);
-        Debug.LogFormat("Got message from the websocket assis? '{0}'", assis);
+        //Debug.LogFormat("Got message from the websocket assis? '{0}'", assis);
         _tracker.assis(assis);
-        Debug.LogFormat("Got message from the websocket temperature? '{0}'", BitConverter.ToInt16(buffer,4));
+       // Debug.LogFormat("Got message from the websocket temperature? '{0}'", BitConverter.ToInt16(buffer,4));
 
         if (i % 100 == 0)
         {
@@ -77,7 +89,7 @@ public class Echo : WebSocketBehavior
             string temperature = rInt.ToString();
             Debug.LogFormat("Message '{0}' sent back to the client", temperature);
             Send(temperature); 
-        }
+                                   }
         i++;
     }
 }

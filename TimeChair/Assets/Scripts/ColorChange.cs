@@ -9,7 +9,7 @@ public class ColorChange : MonoBehaviour
     // Start is called before the first frame update
 
     public bool isPast;
-    
+
     private Color originalColor;
 
     private void Start()
@@ -20,8 +20,8 @@ public class ColorChange : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigered");
-        transform.GetComponent<Renderer>().material.SetColor("_Color", gray);
-        ChairTracker chair = other.GetComponent<ChairTracker>();
+        ChairTracker chair = other.GetComponentInChildren<ChairTracker>();
+
         if (isPast)
         {
             chair.enterPast();
@@ -35,7 +35,7 @@ public class ColorChange : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         transform.GetComponent<Renderer>().material.SetColor("_Color", originalColor);
-        ChairTracker chair = other.GetComponent<ChairTracker>();
+        ChairTracker chair = other.GetComponentInChildren<ChairTracker>();
         if (isPast)
         {
             chair.exitPast();
