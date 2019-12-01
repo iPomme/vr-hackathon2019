@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b6694863c88c4c5b83811a5d061658d
+guid: 1cbcaec474ad845ad91a1732a62fadfb
 ModelImporter:
   serializedVersion: 28
   internalIDToNameTable:
@@ -9,6 +9,12 @@ ModelImporter:
   - first:
       74: 8977431878875885468
     second: Armature|future
+  - first:
+      74: 5706022996541967689
+    second: Armature|future_idle
+  - first:
+      74: -3717194154655804901
+    second: Armature|neutral
   - first:
       74: -6383652215543329618
     second: Armature|neutral_transform
@@ -21,12 +27,6 @@ ModelImporter:
   - first:
       74: -2862618232045958955
     second: Armature|present
-  - first:
-      74: -3717194154655804901
-    second: Armature|neutral
-  - first:
-      74: 5706022996541967689
-    second: Armature|future_idle
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -95,8 +95,8 @@ ModelImporter:
     second: {fileID: 2100000, guid: 5fc78be65e67b46bbbdb6479f886a3e4, type: 2}
   materials:
     materialImportMode: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 2
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -126,7 +126,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
+    useSRGBMaterialColor: 0
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
