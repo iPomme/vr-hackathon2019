@@ -13,13 +13,24 @@ public class WebSocketUnityServer : MonoBehaviourActor
 {
 
     public int port = 8989;
+
+    public GameObject chairTracker;
+    
     // Start is called before the first frame update
     private WebSocketServer wssv;
-    private string temperature;   
+    private string temperature;
+
+    private void Start()
+    {
+        UnityThread.initUnityThread();
+    }
+
     private void OnEnable()
     {
+
+        
         wssv = new WebSocketServer(port);
-        wssv.AddWebSocketService<Echo>("/chair");
+        wssv.AddWebSocketService<Echo>("/chair",() => new Echo(chairTracker));
         wssv.Start();
         
         Debug.LogFormat("Websocket Server started on port {0}", port);
@@ -42,13 +53,21 @@ public class WebSocketUnityServer : MonoBehaviourActor
 public class Echo : WebSocketBehavior
 {
     private int i = 0;
+    private ChairTracker _tracker;
+    
+    public Echo (GameObject tracker)
+    {
+        _tracker = tracker.GetComponent<ChairTracker>();
+    }
     protected override void OnMessage(MessageEventArgs e)
     {
         var buffer = e.RawData;
 //        Debug.LogFormat("Got message from the websocket '{0}'", BitConverter.ToString(buffer));
 
 //        Debug.LogFormat("Got message from the websocket solar value'{0}'", BitConverter.ToInt16(buffer,0));
-        Debug.LogFormat("Got message from the websocket assis? '{0}'", BitConverter.ToInt16(buffer,2));
+        int assis = BitConverter.ToInt16(buffer, 2);
+        Debug.LogFormat("Got message from the websocket assis? '{0}'", assis);
+        _tracker.assis(assis);
         Debug.LogFormat("Got message from the websocket temperature? '{0}'", BitConverter.ToInt16(buffer,4));
 
         if (i % 100 == 0)
