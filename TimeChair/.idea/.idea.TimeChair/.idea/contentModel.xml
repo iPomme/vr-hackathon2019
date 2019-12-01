@@ -620,6 +620,7 @@
               <e p="OVRResources.cs" t="Include" />
               <e p="OVRSceneLoader.cs" t="Include" />
               <e p="OVRTracker.cs" t="Include" />
+              <e p="OVRXRSDKNative.cs" t="Include" />
               <e p="Util" t="Include">
                 <e p="OVRAudioSourceTest.cs" t="Include" />
                 <e p="OVRChromaticAberration.cs" t="Include" />
@@ -671,6 +672,8 @@
           </e>
         </e>
         <e p="scripts" t="Include">
+          <e p="ChairTracker.cs" t="Include" />
+          <e p="ColorChange.cs" t="Include" />
           <e p="TCPTestServer.cs" t="Include" />
           <e p="TemperatureSpammer.cs" t="Include" />
           <e p="websocket-sharp" t="Include">
